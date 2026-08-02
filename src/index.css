@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes marquee-ltr {
+  0% { transform: translate3d(-33.33%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes marquee-rtl {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.33%, 0, 0); }
+}
+
+@keyframes timeline-float-1 {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-3px) rotate(-1.3deg); }
+}
+
+@keyframes timeline-float-2 {
+  0%, 100% { transform: translateY(0) rotate(1deg); }
+  50% { transform: translateY(3px) rotate(1.2deg); }
+}
+
+.animate-marquee-ltr {
+  animation: marquee-ltr var(--marquee-duration, 20s) linear infinite;
+}
+
+.animate-marquee-rtl {
+  animation: marquee-rtl var(--marquee-duration, 24s) linear infinite;
+}
+
+.animate-timeline-float-1 {
+  animation: timeline-float-1 6s ease-in-out infinite;
+}
+
+.animate-timeline-float-2 {
+  animation: timeline-float-2 7s ease-in-out infinite;
+}
+
+/* Glassmorphism custom components */
+.glass-panel {
+  background: rgba(10, 10, 12, 0.45);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.perspective-3d {
+  perspective: 1000px;
+}
+
+/* Skills Orbit animations */
+@keyframes orbit-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbit-spin-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-orbit-spin {
+  animation: orbit-spin var(--orbit-duration, 22s) linear infinite;
+}
+
+.animate-orbit-spin-reverse {
+  animation: orbit-spin-reverse var(--orbit-duration, 22s) linear infinite;
+}
+
+
