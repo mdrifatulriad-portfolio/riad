@@ -26,7 +26,7 @@ interface SoftwareSkill {
   specialties: string[];
 }
 
-export default function SkillsOrbit() {
+export default function SkillsOrbit({ darkMode = true }: { darkMode?: boolean }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedSkill, setSelectedSkill] = useState<SoftwareSkill | null>(null);
   const [globalAngle, setGlobalAngle] = useState(0);
@@ -328,7 +328,7 @@ export default function SkillsOrbit() {
           }}
         >
           <motion.div
-            className="relative h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 rounded-full bg-gray-950 p-2 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex items-center justify-center border border-gray-800/50 backdrop-blur-md"
+            className="relative h-28 w-28 sm:h-36 sm:w-36 md:h-44 md:w-44 rounded-full bg-slate-100 dark:bg-gray-950 p-2 shadow-[0_25px_60px_rgba(0,0,0,0.15)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex items-center justify-center border border-slate-200 dark:border-gray-800/50 backdrop-blur-md"
             animate={{ scale: [1, 1.02, 1] }}
             transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
           >
@@ -343,7 +343,7 @@ export default function SkillsOrbit() {
             <div className="absolute inset-1 rounded-full border border-blue-400/20 pointer-events-none" />
 
             {/* Core Avatar Image frame with vignette */}
-            <div className="h-full w-full rounded-full overflow-hidden relative bg-gray-950 flex items-center justify-center">
+            <div className="h-full w-full rounded-full overflow-hidden relative bg-slate-100 dark:bg-gray-950 flex items-center justify-center">
               <img
                 src={PERSONAL_INFO.avatar}
                 alt={PERSONAL_INFO.name}
@@ -454,14 +454,14 @@ export default function SkillsOrbit() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 12, scale: 0.9 }}
                         transition={{ duration: 0.2, ease: 'easeOut' }}
-                        className="absolute -top-14 left-1/2 -translate-x-1/2 bg-gray-950/95 text-white border border-gray-800 text-[10px] sm:text-[11px] font-bold py-1.5 px-3 rounded-xl shadow-2xl whitespace-nowrap z-[120] pointer-events-none tracking-wide"
+                        className="absolute -top-14 left-1/2 -translate-x-1/2 bg-slate-900/95 dark:bg-gray-950/95 text-white border border-slate-800 dark:border-gray-800 text-[10px] sm:text-[11px] font-bold py-1.5 px-3 rounded-xl shadow-2xl whitespace-nowrap z-[120] pointer-events-none tracking-wide"
                       >
                         <div className="flex items-center gap-1.5 font-sans">
                           <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" style={{ color: skill.textColor }} />
                           {skill.name}
                         </div>
                         {/* Triangular support foot */}
-                        <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-950 border-r border-b border-gray-800 rotate-45" />
+                        <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 dark:bg-gray-950 border-r border-b border-slate-800 dark:border-gray-800 rotate-45" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -490,7 +490,7 @@ export default function SkillsOrbit() {
               initial={{ opacity: 0, scale: 0.93, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.93, y: 30 }}
-              className="relative w-full max-w-lg rounded-3xl bg-gray-950 border border-gray-800 p-6 sm:p-8 overflow-hidden shadow-[0_35px_80px_rgba(0,0,0,0.95)]"
+              className="relative w-full max-w-lg rounded-3xl bg-white dark:bg-gray-950 border border-slate-200 dark:border-gray-800 p-6 sm:p-8 overflow-hidden shadow-[0_35px_80px_rgba(0,0,0,0.15)] dark:shadow-[0_35px_80px_rgba(0,0,0,0.95)]"
               style={{
                 boxShadow: `0 0 55px ${selectedSkill.glowColor.replace('0.45', '0.07')}, 0 30px 80px rgba(0,0,0,0.95)`
               }}
@@ -502,7 +502,7 @@ export default function SkillsOrbit() {
               {/* Close Button Trigger */}
               <button
                 onClick={() => setSelectedSkill(null)}
-                className="absolute top-6 right-6 p-2 rounded-full border border-gray-850 bg-gray-900/60 hover:bg-gray-900 text-gray-400 hover:text-white transition-all cursor-pointer"
+                className="absolute top-6 right-6 p-2 rounded-full border border-slate-200 dark:border-gray-850 bg-slate-50 dark:bg-gray-900/60 hover:bg-slate-100 dark:hover:bg-gray-900 text-slate-400 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all cursor-pointer"
                 title="Dismiss"
               >
                 <X className="w-4 h-4" />
@@ -512,35 +512,35 @@ export default function SkillsOrbit() {
               <div className="flex flex-col gap-6 relative z-10">
                 
                 {/* Header Info */}
-                <div className="flex items-center gap-4 border-b border-gray-900 pb-5">
+                <div className="flex items-center gap-4 border-b border-slate-100 dark:border-gray-900 pb-5">
                   <div className={`w-16 h-16 rounded-2xl ${selectedSkill.bgColor} border ${selectedSkill.borderColor} ${selectedSkill.textColor} flex items-center justify-center font-bold font-mono text-2xl shadow-xl relative`}>
                     <div className="absolute top-1 left-1 w-1.5 h-1.5 border-t border-l border-current" />
                     {selectedSkill.short}
                   </div>
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">{selectedSkill.name}</h3>
-                    <div className="flex items-center gap-2 mt-1.5 text-gray-400 text-xs font-mono font-bold uppercase tracking-wider">
-                      <Clock className="w-3.5 h-3.5 text-blue-400" />
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">{selectedSkill.name}</h3>
+                    <div className="flex items-center gap-2 mt-1.5 text-slate-400 dark:text-gray-400 text-xs font-mono font-bold uppercase tracking-wider">
+                      <Clock className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
                       <span>{selectedSkill.experience} Experience</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Narrative Details */}
-                <p className="text-gray-300 text-sm sm:text-base leading-relaxed text-left font-medium">
+                <p className="text-slate-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed text-left font-medium">
                   {selectedSkill.description}
                 </p>
 
                 {/* Level Scrubber Metric */}
                 <div className="flex flex-col gap-2.5">
-                  <div className="flex items-center justify-between text-xs font-mono font-bold tracking-wider uppercase text-gray-400">
+                  <div className="flex items-center justify-between text-xs font-mono font-bold tracking-wider uppercase text-slate-400 dark:text-gray-400">
                     <div className="flex items-center gap-1.5">
-                      <Sliders className="w-4 h-4 text-orange-400" />
+                      <Sliders className="w-4 h-4 text-orange-500 dark:text-orange-400" />
                       <span>Skill Proficiency</span>
                     </div>
-                    <span className="text-blue-400 font-black">{selectedSkill.level}%</span>
+                    <span className="text-blue-500 dark:text-blue-400 font-black">{selectedSkill.level}%</span>
                   </div>
-                  <div className="h-3 w-full bg-gray-900 rounded-full overflow-hidden border border-gray-800">
+                  <div className="h-3 w-full bg-slate-100 dark:bg-gray-900 rounded-full overflow-hidden border border-slate-200 dark:border-gray-800">
                     <motion.div
                       className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-orange-400 rounded-full"
                       initial={{ width: 0 }}
@@ -552,15 +552,15 @@ export default function SkillsOrbit() {
 
                 {/* Specialty Tags */}
                 <div>
-                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold tracking-wider uppercase text-gray-400 mb-3">
-                    <Award className="w-4 h-4 text-blue-400" />
+                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold tracking-wider uppercase text-slate-400 dark:text-gray-400 mb-3">
+                    <Award className="w-4 h-4 text-blue-500 dark:text-blue-400" />
                     <span>Specialties & Workflow</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {selectedSkill.specialties.map((spec, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1.5 rounded-lg bg-gray-900 border border-gray-800/80 text-gray-300 text-xs font-bold font-sans tracking-wide shadow-sm"
+                        className="px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-gray-900 border border-slate-200 dark:border-gray-800/80 text-slate-700 dark:text-gray-300 text-xs font-bold font-sans tracking-wide shadow-sm"
                       >
                         {spec}
                       </span>
@@ -569,10 +569,10 @@ export default function SkillsOrbit() {
                 </div>
 
                 {/* Action Controls */}
-                <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-900 mt-2">
+                <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-gray-900 mt-2">
                   <button
                     onClick={() => setSelectedSkill(null)}
-                    className="px-5 py-2.5 rounded-xl border border-gray-800 hover:border-gray-700 bg-gray-950 hover:bg-gray-900 text-gray-300 text-xs font-bold tracking-wide transition-all cursor-pointer"
+                    className="px-5 py-2.5 rounded-xl border border-slate-200 dark:border-gray-800 hover:border-slate-300 dark:hover:border-gray-700 bg-white dark:bg-gray-950 hover:bg-slate-50 dark:hover:bg-gray-900 text-slate-600 dark:text-gray-300 text-xs font-bold tracking-wide transition-all cursor-pointer"
                   >
                     Close Details
                   </button>

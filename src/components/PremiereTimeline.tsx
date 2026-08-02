@@ -15,7 +15,11 @@ interface Clip {
   keyframes?: number[]; // positions
 }
 
-export default function PremiereTimeline() {
+interface PremiereTimelineProps {
+  darkMode?: boolean;
+}
+
+export default function PremiereTimeline({ darkMode = true }: PremiereTimelineProps) {
   const [isPlaying, setIsPlaying] = useState(true);
   const [zoom, setZoom] = useState(1); // 1 to 2 zoom scale
   const [playheadPos, setPlayheadPos] = useState(25); // percentage
@@ -122,20 +126,20 @@ export default function PremiereTimeline() {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: 'easeOut' }}
-      className="w-full bg-[#0D1527]/90 border border-blue-500/20 rounded-2xl shadow-[0_20px_50px_rgba(37,99,235,0.15)] overflow-hidden backdrop-blur-xl max-w-5xl mx-auto"
+      className="w-full bg-white dark:bg-[#0D1527]/90 border border-slate-200 dark:border-blue-500/20 rounded-2xl shadow-[0_20px_50px_rgba(37,99,235,0.05)] dark:shadow-[0_20px_50px_rgba(37,99,235,0.15)] overflow-hidden backdrop-blur-xl max-w-5xl mx-auto"
       id="premiere-pro-timeline"
     >
       {/* 1. Header Toolbar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between px-4 py-3 md:py-3.5 border-b border-gray-800/60 bg-gray-950/40 gap-3">
+      <div className="flex flex-col md:flex-row md:items-center justify-between px-4 py-3 md:py-3.5 border-b border-slate-200 dark:border-gray-800/60 bg-slate-50 dark:bg-gray-950/40 gap-3">
         <div className="flex items-center justify-between md:justify-start gap-3 w-full md:w-auto">
           <div className="flex gap-1.5 shrink-0">
             <span className="w-2.5 h-2.5 rounded-full bg-red-500/80 animate-pulse" />
             <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
             <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           </div>
-          <div className="h-4 w-[1px] bg-gray-800 shrink-0" />
-          <span className="text-[10px] xs:text-xs font-mono font-bold text-gray-400 tracking-wider flex items-center gap-1.5 truncate max-w-[160px] xs:max-w-[200px] sm:max-w-none">
-            <Film className="h-3.5 w-3.5 text-blue-400 shrink-0" />
+          <div className="h-4 w-[1px] bg-slate-200 dark:bg-gray-800 shrink-0" />
+          <span className="text-[10px] xs:text-xs font-mono font-bold text-slate-500 dark:text-gray-400 tracking-wider flex items-center gap-1.5 truncate max-w-[160px] xs:max-w-[200px] sm:max-w-none">
+            <Film className="h-3.5 w-3.5 text-blue-500 dark:text-blue-400 shrink-0" />
             <span className="truncate">EXPORT_RENDER_RIFAT.prproj</span>
           </span>
         </div>
@@ -143,11 +147,11 @@ export default function PremiereTimeline() {
         {/* Playhead Timecode and Actions row */}
         <div className="flex items-center justify-between md:justify-end gap-3 w-full md:w-auto">
           {/* Playhead Timecode display */}
-          <div className="flex items-center gap-2 bg-gray-950/80 border border-gray-800/60 px-3 py-1 rounded-lg shrink-0">
+          <div className="flex items-center gap-2 bg-slate-100 dark:bg-gray-950/80 border border-slate-200 dark:border-gray-800/60 px-3 py-1 rounded-lg shrink-0">
             <span className="text-xs sm:text-sm font-mono font-bold text-red-500 tracking-wider">
               {formatTimecode(playheadPos)}
             </span>
-            <div className="text-[9px] font-mono text-gray-500 font-bold uppercase tracking-widest hidden sm:inline">
+            <div className="text-[9px] font-mono text-slate-400 dark:text-gray-500 font-bold uppercase tracking-widest hidden sm:inline">
               23.976 fps
             </div>
           </div>
@@ -158,8 +162,8 @@ export default function PremiereTimeline() {
               onClick={() => setIsPlaying(!isPlaying)}
               className={`h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-lg flex items-center justify-center transition-colors border cursor-pointer ${
                 isPlaying 
-                  ? 'bg-red-500/10 border-red-500/40 text-red-400 hover:bg-red-500/20' 
-                  : 'bg-blue-500/10 border-blue-500/40 text-blue-400 hover:bg-blue-500/20'
+                  ? 'bg-red-500/10 border-red-500/40 text-red-500 dark:text-red-400 hover:bg-red-500/20' 
+                  : 'bg-blue-500/10 border-blue-500/40 text-blue-500 dark:text-blue-400 hover:bg-blue-500/20'
               }`}
             >
               {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5 fill-current" />}
@@ -167,28 +171,28 @@ export default function PremiereTimeline() {
             
             <button 
               onClick={() => setPlayheadPos(10)}
-              className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-lg bg-gray-900 border border-gray-800 text-gray-400 hover:text-white flex items-center justify-center cursor-pointer"
+              className="h-7.5 w-7.5 sm:h-8 sm:w-8 rounded-lg bg-slate-100 border border-slate-200 text-slate-500 hover:text-slate-900 dark:bg-gray-900 dark:border-gray-800 dark:text-gray-400 dark:hover:text-white flex items-center justify-center cursor-pointer"
               title="Reset Playhead"
             >
               <RotateCcw className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
             </button>
 
-            <div className="h-4 w-[1px] bg-gray-800 hidden xs:inline" />
+            <div className="h-4 w-[1px] bg-slate-200 dark:bg-gray-800 hidden xs:inline" />
 
             {/* Zoom Control - Hidden on mobile, shown on tablet & desktop */}
             <div className="hidden xs:flex items-center gap-1.5">
               <button 
                 onClick={() => setZoom(prev => Math.max(1, prev - 0.2))}
-                className="p-1 text-gray-400 hover:text-white transition-colors"
+                className="p-1 text-slate-400 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors"
               >
                 <ZoomOut className="h-3.5 w-3.5" />
               </button>
-              <span className="text-[9px] font-mono font-bold text-gray-500 w-7 text-center select-none">
+              <span className="text-[9px] font-mono font-bold text-slate-400 dark:text-gray-500 w-7 text-center select-none">
                 {Math.round(zoom * 100)}%
               </span>
               <button 
                 onClick={() => setZoom(prev => Math.min(2, prev + 0.2))}
-                className="p-1 text-gray-400 hover:text-white transition-colors"
+                className="p-1 text-slate-400 hover:text-slate-900 dark:text-gray-400 dark:hover:text-white transition-colors"
               >
                 <ZoomIn className="h-3.5 w-3.5" />
               </button>
@@ -199,29 +203,29 @@ export default function PremiereTimeline() {
 
       {/* 2. Rulers / Time Marks */}
       <div 
-        className="h-8 bg-gray-950/60 border-b border-gray-800/40 relative select-none cursor-ew-resize overflow-hidden"
+        className="h-8 bg-slate-100/85 dark:bg-gray-950/60 border-b border-slate-200 dark:border-gray-800/40 relative select-none cursor-ew-resize overflow-hidden"
         onClick={handleTimelineClick}
       >
         {/* Subtle background grid ticks */}
         <div className="absolute inset-0 flex justify-between px-4 pointer-events-none">
           {Array.from({ length: 11 }).map((_, idx) => (
             <div key={idx} className="flex flex-col items-center justify-between h-full pt-1.5">
-              <span className="text-[9px] font-mono text-gray-600 font-semibold">
+              <span className="text-[9px] font-mono text-slate-400 dark:text-gray-600 font-semibold">
                 00:00:0{idx}:00
               </span>
-              <div className="h-2 w-[1px] bg-gray-800" />
+              <div className="h-2 w-[1px] bg-slate-200 dark:bg-gray-800" />
             </div>
           ))}
         </div>
       </div>
 
       {/* 3. Tracks Panel Container */}
-      <div className="relative min-h-[220px] max-h-[320px] overflow-y-auto bg-gray-950/20 flex flex-col">
+      <div className="relative min-h-[220px] max-h-[320px] overflow-y-auto bg-slate-50/50 dark:bg-gray-950/20 flex flex-col">
         
         {/* Background ticks extending vertically */}
-        <div className="absolute inset-y-0 left-0 right-0 flex justify-between pointer-events-none opacity-5">
+        <div className="absolute inset-y-0 left-0 right-0 flex justify-between pointer-events-none opacity-5 dark:opacity-5">
           {Array.from({ length: 11 }).map((_, idx) => (
-            <div key={idx} className="w-[1px] h-full bg-white border-dashed border-gray-100" />
+            <div key={idx} className="w-[1px] h-full bg-slate-400 dark:bg-white border-dashed border-gray-100" />
           ))}
         </div>
 
@@ -239,12 +243,13 @@ export default function PremiereTimeline() {
           activeClipId,
           setActiveClipId,
           handleTimelineClick,
-          renderWaveform: null
+          renderWaveform: null,
+          darkMode
         })}
 
         {renderTrackRow({
           id: 'V1',
-          icon: <Film className="h-3.5 w-3.5 text-blue-400" />,
+          icon: <Film className="h-3.5 w-3.5 text-blue-500 dark:text-blue-400" />,
           clips: videoTrack1,
           isLocked: isLocked.V1,
           isVisible: isVisible.V1,
@@ -255,15 +260,16 @@ export default function PremiereTimeline() {
           activeClipId,
           setActiveClipId,
           handleTimelineClick,
-          renderWaveform: null
+          renderWaveform: null,
+          darkMode
         })}
 
         {/* Divider */}
-        <div className="h-1.5 bg-gray-950/90 border-y border-gray-900/60" />
+        <div className="h-1.5 bg-slate-200 dark:bg-gray-950/90 border-y border-slate-300 dark:border-gray-900/60" />
 
         {renderTrackRow({
           id: 'A1',
-          icon: <Volume2 className="h-3.5 w-3.5 text-emerald-400" />,
+          icon: <Volume2 className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" />,
           clips: audioTrack1,
           isLocked: isLocked.A1,
           isVisible: isVisible.A1,
@@ -274,12 +280,13 @@ export default function PremiereTimeline() {
           activeClipId,
           setActiveClipId,
           handleTimelineClick,
-          renderWaveform: (seed) => renderWaveform(seed, 40)
+          renderWaveform: (seed) => renderWaveform(seed, 40),
+          darkMode
         })}
 
         {renderTrackRow({
           id: 'A2',
-          icon: <Music className="h-3.5 w-3.5 text-violet-400" />,
+          icon: <Music className="h-3.5 w-3.5 text-violet-500 dark:text-violet-400" />,
           clips: audioTrack2,
           isLocked: isLocked.A2,
           isVisible: isVisible.A2,
@@ -290,7 +297,8 @@ export default function PremiereTimeline() {
           activeClipId,
           setActiveClipId,
           handleTimelineClick,
-          renderWaveform: (seed) => renderWaveform(seed, 30)
+          renderWaveform: (seed) => renderWaveform(seed, 30),
+          darkMode
         })}
 
         {/* 4. Playhead Vertical Overlay Line */}
@@ -309,17 +317,17 @@ export default function PremiereTimeline() {
       </div>
 
       {/* 5. Footer Preview Status */}
-      <div className="px-5 py-3 border-t border-gray-800/40 bg-gray-950/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-        <div className="flex flex-wrap items-center gap-4 text-gray-500">
+      <div className="px-5 py-3 border-t border-slate-200 dark:border-gray-800/40 bg-slate-50 dark:bg-gray-950/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex flex-wrap items-center gap-4 text-slate-500 dark:text-gray-500">
           <span className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
             GPU acceleration: Enabled
           </span>
           <span className="hidden sm:inline">•</span>
-          <span>Active Layer: <strong className="text-gray-300 font-mono">{activeClipId || 'None'}</strong></span>
+          <span>Active Layer: <strong className="text-slate-700 dark:text-gray-300 font-mono">{activeClipId || 'None'}</strong></span>
         </div>
-        <div className="text-gray-400 font-medium">
-          💡 <span className="text-gray-500">Pro Tip:</span> Click anywhere on the timeline to scrub or pause/play to see real waveforms!
+        <div className="text-slate-600 dark:text-gray-400 font-medium">
+          💡 <span className="text-slate-400 dark:text-gray-500">Pro Tip:</span> Click anywhere on the timeline to scrub or pause/play to see real waveforms!
         </div>
       </div>
     </motion.div>
@@ -341,30 +349,31 @@ interface TrackRowProps {
   setActiveClipId: (id: string | null) => void;
   handleTimelineClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   renderWaveform: ((seed: number) => React.ReactNode) | null;
+  darkMode?: boolean;
 }
 
 function renderTrackRow({
-  id, icon, clips, isLocked, isVisible, onToggleLock, onToggleVisible, zoom, playheadPos, activeClipId, setActiveClipId, handleTimelineClick, renderWaveform
+  id, icon, clips, isLocked, isVisible, onToggleLock, onToggleVisible, zoom, playheadPos, activeClipId, setActiveClipId, handleTimelineClick, renderWaveform, darkMode = true
 }: TrackRowProps) {
   return (
-    <div className="flex h-12 border-b border-gray-800/30 items-stretch select-none relative group/row">
+    <div className="flex h-12 border-b border-slate-200 dark:border-gray-800/30 items-stretch select-none relative group/row">
       {/* Sidebar - Controls */}
-      <div className="w-24 sm:w-32 bg-gray-950/70 border-r border-gray-800/50 px-2 sm:px-3 flex items-center justify-between text-[11px] font-mono text-gray-400 z-10 shrink-0">
+      <div className="w-24 sm:w-32 bg-slate-50/95 dark:bg-gray-950/70 border-r border-slate-200 dark:border-gray-800/50 px-2 sm:px-3 flex items-center justify-between text-[11px] font-mono text-slate-500 dark:text-gray-400 z-10 shrink-0">
         <div className="flex items-center gap-1.5">
           {icon}
-          <span className="font-bold tracking-wider text-gray-200">{id}</span>
+          <span className="font-bold tracking-wider text-slate-700 dark:text-gray-200">{id}</span>
         </div>
         <div className="flex items-center gap-1">
           <button 
             onClick={onToggleVisible}
-            className={`p-1 rounded hover:bg-gray-800 transition-colors ${!isVisible ? 'text-blue-400' : 'text-gray-600'}`}
+            className={`p-1 rounded hover:bg-slate-250 dark:hover:bg-gray-800 transition-colors ${!isVisible ? 'text-blue-500 dark:text-blue-400' : 'text-slate-400 dark:text-gray-600'}`}
             title={isVisible ? 'Hide track' : 'Show track'}
           >
             {isVisible ? <Eye className="h-3 w-3" /> : <EyeOff className="h-3 w-3" />}
           </button>
           <button 
             onClick={onToggleLock}
-            className={`p-1 rounded hover:bg-gray-800 transition-colors ${isLocked ? 'text-amber-500' : 'text-gray-600'}`}
+            className={`p-1 rounded hover:bg-slate-250 dark:hover:bg-gray-800 transition-colors ${isLocked ? 'text-amber-500' : 'text-slate-400 dark:text-gray-600'}`}
             title={isLocked ? 'Unlock track' : 'Lock track'}
           >
             {isLocked ? <Lock className="h-3 w-3" /> : <Unlock className="h-3 w-3" />}

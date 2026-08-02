@@ -100,7 +100,11 @@ const fetchYouTubeTitle = async (videoUrl: string): Promise<string | null> => {
   return null;
 };
 
-export default function Portfolio() {
+interface PortfolioProps {
+  darkMode?: boolean;
+}
+
+export default function Portfolio({ darkMode = true }: PortfolioProps) {
   const [projects, setProjects] = useState<Project[]>([]);
   const [activeFilter, setActiveFilter] = useState<FilterCategory>('All');
   const [selectedProjectIndex, setSelectedProjectIndex] = useState<number | null>(null);
@@ -281,16 +285,16 @@ export default function Portfolio() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-16">
           <div className="flex flex-col items-start text-left">
-            <span className="text-xs font-mono text-blue-400 font-bold uppercase tracking-widest mb-2">// CREATIVE WORK</span>
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white">Interactive Portfolio</h2>
-            <p className="text-gray-400 text-sm mt-3 max-w-lg">
+            <span className="text-xs font-mono text-blue-500 dark:text-blue-400 font-bold uppercase tracking-widest mb-2">// CREATIVE WORK</span>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">Interactive Portfolio</h2>
+            <p className="text-slate-600 dark:text-gray-400 text-sm mt-3 max-w-lg">
               Explore my collection of graphic designs and high-fidelity video projects. Click any project card to launch a premium cinematic preview.
             </p>
             <div className="mt-4 h-1 w-16 bg-blue-500 rounded-full" />
           </div>
 
           {/* Filter Navigation Row */}
-          <div className="flex flex-wrap gap-2 bg-gray-950/40 p-1.5 rounded-2xl border border-gray-800/25 max-w-full shrink-0">
+          <div className="flex flex-wrap gap-2 bg-slate-100 dark:bg-gray-950/40 p-1.5 rounded-2xl border border-slate-200/60 dark:border-gray-800/25 max-w-full shrink-0">
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -301,7 +305,7 @@ export default function Portfolio() {
                 className={`px-3.5 py-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 cursor-pointer ${
                   activeFilter === cat
                     ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
-                    : 'text-gray-400 hover:text-white'
+                    : 'text-slate-500 dark:text-gray-400 hover:text-slate-950 dark:hover:text-white'
                 }`}
               >
                 {cat}
@@ -359,7 +363,7 @@ export default function Portfolio() {
                       setHoveredProjectId(null);
                     }
                   }}
-                  className="group relative aspect-[16/10] w-full bg-gray-950/60 backdrop-blur-md border border-white/15 hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.45)] rounded-3xl overflow-hidden shadow-2xl cursor-pointer select-none transition-all duration-500"
+                  className="group relative aspect-[16/10] w-full bg-white dark:bg-gray-950/60 backdrop-blur-md border border-slate-200 dark:border-white/15 hover:border-blue-500/50 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_40px_rgba(59,130,246,0.45)] rounded-3xl overflow-hidden shadow-2xl cursor-pointer select-none transition-all duration-500"
                 >
                   {/* Glowing background blur layer for premium cards */}
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10" />
@@ -508,7 +512,7 @@ export default function Portfolio() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProjectIndex(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-gray-950/95 backdrop-blur-xl select-none"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl select-none"
           >
             {/* Soft background light source */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-blue-500/5 blur-[160px] pointer-events-none" />
@@ -520,7 +524,7 @@ export default function Portfolio() {
               exit={{ scale: 0.95, y: 15 }}
               transition={{ type: 'spring', damping: 25, stiffness: 220 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-5xl bg-gray-900/60 border border-white/10 rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl flex flex-col lg:flex-row items-stretch lg:min-h-[580px]"
+              className="relative w-full max-w-5xl bg-white dark:bg-gray-900/60 border border-slate-200 dark:border-white/10 rounded-3xl sm:rounded-[32px] overflow-hidden shadow-2xl flex flex-col lg:flex-row items-stretch lg:min-h-[580px]"
             >
               
               {/* Media Content Area (Left/Top) */}
@@ -588,14 +592,14 @@ export default function Portfolio() {
                   <>
                     <button
                       onClick={handlePrev}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gray-950/80 backdrop-blur-md border border-white/10 hover:border-blue-500/50 hover:text-blue-400 text-white flex items-center justify-center shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer z-10"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/85 dark:bg-gray-950/80 backdrop-blur-md border border-slate-200 dark:border-white/10 hover:border-blue-500/50 hover:text-blue-500 dark:hover:text-blue-400 text-slate-800 dark:text-white flex items-center justify-center shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer z-10"
                       title="Previous Project"
                     >
                       <ChevronLeft className="h-5 w-5" />
                     </button>
                     <button
                       onClick={handleNext}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gray-950/80 backdrop-blur-md border border-white/10 hover:border-blue-500/50 hover:text-blue-400 text-white flex items-center justify-center shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer z-10"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/85 dark:bg-gray-950/80 backdrop-blur-md border border-slate-200 dark:border-white/10 hover:border-blue-500/50 hover:text-blue-500 dark:hover:text-blue-400 text-slate-800 dark:text-white flex items-center justify-center shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer z-10"
                       title="Next Project"
                     >
                       <ChevronRight className="h-5 w-5" />
@@ -605,12 +609,12 @@ export default function Portfolio() {
               </div>
 
               {/* Text & Meta Information Panel (Right/Bottom) */}
-              <div className="w-full lg:w-[42%] bg-gray-950/40 p-6 sm:p-8 md:p-10 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-white/10 text-left relative">
+              <div className="w-full lg:w-[42%] bg-slate-50/50 dark:bg-gray-950/40 p-6 sm:p-8 md:p-10 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-white/10 text-left relative">
                 
                 {/* Close Button */}
                 <button
                   onClick={() => setSelectedProjectIndex(null)}
-                  className="absolute top-6 right-6 h-10 w-10 rounded-full bg-gray-900 border border-white/10 hover:border-red-500/50 text-gray-400 hover:text-red-400 flex items-center justify-center transition-all duration-300 hover:rotate-90 shadow-lg cursor-pointer z-20"
+                  className="absolute top-6 right-6 h-10 w-10 rounded-full bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-white/10 hover:border-red-500/50 text-slate-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 flex items-center justify-center transition-all duration-300 hover:rotate-90 shadow-lg cursor-pointer z-20"
                   aria-label="Close modal"
                 >
                   <X className="h-5 w-5" />
@@ -619,29 +623,29 @@ export default function Portfolio() {
                 {/* Primary Meta Content Block */}
                 <div className="pr-10 lg:pr-4">
                   {/* Category Eyebrow badge */}
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold tracking-widest uppercase mb-4">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-mono font-bold tracking-widest uppercase mb-4">
                     {activeProject.videoUrl ? <Film className="h-3 w-3" /> : <ImageIcon className="h-3 w-3" />}
                     <span>{activeProject.category}</span>
                   </span>
 
                   {/* Heading Title */}
-                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight leading-snug mb-4">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-snug mb-4">
                     {activeProject.title}
                   </h3>
 
                   {/* Detailed Description paragraph */}
-                  <p className="text-xs sm:text-sm text-gray-400 leading-relaxed mb-6 font-medium">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-gray-400 leading-relaxed mb-6 font-medium">
                     {activeProject.description}
                   </p>
 
                   {/* Software Used (requested) */}
                   <div className="mb-6">
-                    <h4 className="text-[10px] font-mono text-gray-500 font-bold uppercase tracking-widest mb-3">Software Used</h4>
+                    <h4 className="text-[10px] font-mono text-slate-400 dark:text-gray-500 font-bold uppercase tracking-widest mb-3">Software Used</h4>
                     <div className="flex flex-wrap gap-2">
                       {getSoftwareUsed(activeProject).map((software, idx) => (
                         <span 
                           key={idx} 
-                          className="text-[10px] sm:text-xs font-mono bg-blue-500/10 border border-blue-500/20 text-blue-300 px-3 py-1 rounded-xl shadow-sm hover:border-blue-500/40 hover:text-white transition-colors"
+                          className="text-[10px] sm:text-xs font-mono bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-300 px-3 py-1 rounded-xl shadow-sm hover:border-blue-500/40 hover:text-blue-800 dark:hover:text-white transition-colors"
                         >
                           {software}
                         </span>
@@ -651,12 +655,12 @@ export default function Portfolio() {
 
                   {/* Custom Tags Section */}
                   <div className="mb-8">
-                    <h4 className="text-[10px] font-mono text-gray-500 font-bold uppercase tracking-widest mb-3">Core Assets & Skills</h4>
+                    <h4 className="text-[10px] font-mono text-slate-400 dark:text-gray-500 font-bold uppercase tracking-widest mb-3">Core Assets & Skills</h4>
                     <div className="flex flex-wrap gap-2">
                       {activeProject.tags.map((tag, idx) => (
                         <span 
                           key={idx} 
-                          className="text-[10px] sm:text-xs font-mono bg-gray-900 border border-white/5 text-gray-300 px-3 py-1 rounded-xl shadow-sm hover:border-blue-500/20 hover:text-white transition-colors"
+                          className="text-[10px] sm:text-xs font-mono bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-gray-300 px-3 py-1 rounded-xl shadow-sm hover:border-blue-500/20 hover:text-slate-900 dark:hover:text-white transition-colors"
                         >
                           #{tag}
                         </span>
@@ -666,7 +670,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Bottom Call-to-actions */}
-                <div className="flex flex-wrap gap-3.5 pt-6 border-t border-white/10 mt-6 shrink-0">
+                <div className="flex flex-wrap gap-3.5 pt-6 border-t border-slate-200 dark:border-white/10 mt-6 shrink-0">
                   <a
                     href={activeProject.behanceUrl || activeProject.liveUrl || "https://behance.net/mdrifatulriad"}
                     target="_blank"
@@ -681,7 +685,7 @@ export default function Portfolio() {
                       href={activeProject.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-gray-300 bg-gray-900/90 hover:bg-gray-800 border border-white/10 py-3.5 rounded-xl transition-all hover:text-white hover:scale-[1.02] cursor-pointer"
+                      className="flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-slate-700 dark:text-gray-300 bg-slate-100 hover:bg-slate-200 dark:bg-gray-900/90 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-white/10 py-3.5 rounded-xl transition-all hover:scale-[1.02] cursor-pointer"
                     >
                       <Globe className="h-4 w-4" />
                       Live Demo

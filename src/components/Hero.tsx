@@ -5,7 +5,11 @@ import { PERSONAL_INFO } from '../data';
 import PremiereTimeline from './PremiereTimeline';
 import TimelineStrips from './TimelineStrips';
 
-export default function Hero() {
+interface HeroProps {
+  darkMode?: boolean;
+}
+
+export default function Hero({ darkMode = true }: HeroProps) {
   const skills = ["Graphic Designer", "Video Editor", "Meta Marketer", "Generative AI Tools"];
   const [skillIndex, setSkillIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
@@ -76,7 +80,7 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-12 overflow-hidden px-4 md:px-8 max-w-7xl mx-auto group/hero"
     >
       {/* Premium Shifting Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[#0B1120] via-[#0E172C] to-[#0A0F1D] z-0 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-slate-50 via-white to-slate-100 dark:from-[#0B1120] dark:via-[#0E172C] dark:to-[#0A0F1D] z-0 pointer-events-none" />
 
       {/* Mouse follow spotlight (requested) */}
       <div 
@@ -191,7 +195,7 @@ export default function Hero() {
           {/* Eyebrow badges row */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 mb-6">
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 font-mono text-[10px] xs:text-xs font-black tracking-widest uppercase shadow-[0_0_15px_rgba(59,130,246,0.15)]"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-600 dark:text-blue-400 font-mono text-[10px] xs:text-xs font-black tracking-widest uppercase shadow-[0_0_15px_rgba(59,130,246,0.15)]"
               initial={{ opacity: 0, filter: 'blur(8px)', y: 15 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -204,7 +208,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] xs:text-xs font-black tracking-widest uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-mono text-[10px] xs:text-xs font-black tracking-widest uppercase shadow-[0_0_15px_rgba(16,185,129,0.15)]"
               initial={{ opacity: 0, filter: 'blur(8px)', y: 15 }}
               animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
@@ -219,16 +223,16 @@ export default function Hero() {
 
           {/* Name Header with text sweep, glow, and increased sharpness */}
           <motion.h1
-            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-2 leading-none relative select-none"
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 dark:text-white mb-2 leading-none relative select-none"
             initial={{ opacity: 0, filter: 'blur(12px)', y: 30 }}
             animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             style={{
-              textShadow: '0 0 40px rgba(59, 130, 246, 0.25), 0 0 80px rgba(59, 130, 246, 0.1)',
+              textShadow: '0 0 40px rgba(59, 130, 246, 0.15), 0 0 80px rgba(59, 130, 246, 0.05)',
               letterSpacing: '-0.035em',
             }}
           >
-            MOHAMMAD <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-100 to-white font-black drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
+            MOHAMMAD <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-slate-900 dark:from-blue-400 dark:via-indigo-100 dark:to-white font-black drop-shadow-[0_0_20px_rgba(59,130,246,0.25)] dark:drop-shadow-[0_0_20px_rgba(59,130,246,0.4)]">
               RIFAT
               {/* Light Sweep Animation overlay */}
               <span 
@@ -248,11 +252,11 @@ export default function Hero() {
             animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.18 }}
           >
-            <span className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-white flex items-center font-sans">
+            <span className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center font-sans">
               <span className="text-blue-500 mr-2 sm:mr-3 select-none text-xl sm:text-2xl md:text-3xl drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]">
                 •
               </span>
-              <span className="bg-gradient-to-r from-white via-indigo-100 to-blue-200 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.45)] font-sans font-bold">
+              <span className="bg-gradient-to-r from-slate-900 via-indigo-950 to-blue-800 dark:from-white dark:via-indigo-100 dark:to-blue-200 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.45)] font-sans font-bold">
                 {displayText}
               </span>
               <span className="w-[3px] h-5 sm:h-7 bg-blue-400 ml-2 animate-pulse rounded-full shadow-[0_0_10px_#60a5fa]" style={{ animationDuration: '0.8s' }} />
@@ -261,7 +265,7 @@ export default function Hero() {
 
           {/* Short introduction */}
           <motion.p
-            className="text-sm xs:text-base sm:text-lg text-gray-400 font-medium leading-relaxed max-w-xl mb-6 select-none mt-4 px-4 sm:px-0"
+            className="text-sm xs:text-base sm:text-lg text-slate-600 dark:text-gray-400 font-medium leading-relaxed max-w-xl mb-6 select-none mt-4 px-4 sm:px-0"
             initial={{ opacity: 0, filter: 'blur(8px)', y: 20 }}
             animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -276,7 +280,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <span className="text-xs font-mono font-bold text-gray-500 uppercase tracking-widest mr-1.5">// CONNECT:</span>
+            <span className="text-xs font-mono font-bold text-slate-400 dark:text-gray-500 uppercase tracking-widest mr-1.5">// CONNECT:</span>
             
             {/* Behance */}
             <motion.a
@@ -284,7 +288,7 @@ export default function Hero() {
               href={PERSONAL_INFO.socials.behance}
               target="_blank"
               rel="noreferrer"
-              className="h-10 w-10 bg-gray-900/40 border border-gray-800/40 hover:border-blue-500/35 hover:bg-blue-600/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all shadow-md cursor-pointer"
+              className="h-10 w-10 bg-slate-200/50 dark:bg-gray-900/40 border border-slate-200 dark:border-gray-800/40 hover:border-blue-500/35 hover:bg-blue-600/10 rounded-xl flex items-center justify-center text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-md cursor-pointer"
               aria-label="Behance profile link"
               title="Behance"
             >
@@ -297,7 +301,7 @@ export default function Hero() {
               href={PERSONAL_INFO.socials.facebook}
               target="_blank"
               rel="noreferrer"
-              className="h-10 w-10 bg-gray-900/40 border border-gray-800/40 hover:border-blue-500/45 hover:bg-blue-600/10 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all shadow-md cursor-pointer"
+              className="h-10 w-10 bg-slate-200/50 dark:bg-gray-900/40 border border-slate-200 dark:border-gray-800/40 hover:border-blue-500/45 hover:bg-blue-600/10 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] rounded-xl flex items-center justify-center text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-md cursor-pointer"
               aria-label="Facebook profile link"
               title="Facebook"
             >
@@ -310,7 +314,7 @@ export default function Hero() {
               href={PERSONAL_INFO.socials.instagram}
               target="_blank"
               rel="noreferrer"
-              className="h-10 w-10 bg-gray-900/40 border border-gray-800/40 hover:border-blue-500/35 hover:bg-blue-600/10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white transition-all shadow-md cursor-pointer"
+              className="h-10 w-10 bg-slate-200/50 dark:bg-gray-900/40 border border-slate-200 dark:border-gray-800/40 hover:border-blue-500/35 hover:bg-blue-600/10 rounded-xl flex items-center justify-center text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white transition-all shadow-md cursor-pointer"
               aria-label="Instagram profile link"
               title="Instagram"
             >
@@ -324,13 +328,13 @@ export default function Hero() {
                 href="https://www.youtube.com/@MdrifatulIslam3426/shorts"
                 target="_blank"
                 rel="noreferrer"
-                className="h-10 w-10 bg-gray-900/40 border border-gray-800/40 hover:border-red-500/50 hover:bg-red-600/10 hover:shadow-[0_0_15px_rgba(239,68,68,0.45)] rounded-xl flex items-center justify-center text-gray-400 hover:text-red-500 transition-all shadow-md cursor-pointer"
+                className="h-10 w-10 bg-slate-200/50 dark:bg-gray-900/40 border border-slate-200 dark:border-gray-800/40 hover:border-red-500/50 hover:bg-red-600/10 hover:shadow-[0_0_15px_rgba(239,68,68,0.45)] rounded-xl flex items-center justify-center text-slate-500 dark:text-gray-400 hover:text-red-500 transition-all shadow-md cursor-pointer"
                 aria-label="YouTube Shorts channel link"
               >
                 <Youtube className="h-4.5 w-4.5" />
               </motion.a>
               {/* Tooltip */}
-              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-gray-950 text-white text-[10px] font-bold py-1 px-2.5 rounded border border-gray-800/80 whitespace-nowrap opacity-0 group-hover/yth:opacity-100 transition-opacity pointer-events-none z-50 shadow-md">
+              <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-slate-900 dark:bg-gray-950 text-white text-[10px] font-bold py-1 px-2.5 rounded border border-slate-700 dark:border-gray-800/80 whitespace-nowrap opacity-0 group-hover/yth:opacity-100 transition-opacity pointer-events-none z-50 shadow-md">
                 Watch My YouTube Portfolio
               </div>
             </div>
@@ -361,11 +365,11 @@ export default function Hero() {
 
             <motion.a
               href={PERSONAL_INFO.cvUrl}
-              className="flex items-center gap-2 bg-gray-950/70 hover:bg-gray-900 border border-gray-800/80 hover:border-gray-700 text-gray-300 hover:text-white font-bold text-xs tracking-widest uppercase px-5 py-4 rounded-xl transition-all duration-300 relative"
+              className="flex items-center gap-2 bg-slate-100 dark:bg-gray-950/70 hover:bg-slate-200 dark:hover:bg-gray-900 border border-slate-200 dark:border-gray-800/80 hover:border-slate-300 dark:hover:border-gray-700 text-slate-700 dark:text-gray-300 hover:text-slate-950 dark:hover:text-white font-bold text-xs tracking-widest uppercase px-5 py-4 rounded-xl transition-all duration-300 relative"
               whileHover={{ 
                 scale: 1.03, 
                 y: -2,
-                boxShadow: '0 0 20px rgba(255, 255, 255, 0.05), 0 10px 25px rgba(0,0,0,0.5)'
+                boxShadow: '0 0 20px rgba(255, 255, 255, 0.05), 0 10px 25px rgba(0,0,0,0.1)'
               }}
               whileTap={{ scale: 0.98 }}
             >
@@ -419,13 +423,13 @@ export default function Hero() {
             </div>
 
             {/* 2. VIDEO EDITING TIMELINE-INSPIRED BACKGROUND */}
-            <div className="absolute inset-x-4 top-[15%] bottom-[12%] rounded-2xl bg-gray-950/75 border border-gray-900/60 p-3 shadow-inner z-10 overflow-hidden select-none transition-all duration-700 blur-[2px] opacity-40 hover:blur-[0.5px] hover:opacity-75 pointer-events-none">
+            <div className="absolute inset-x-4 top-[15%] bottom-[12%] rounded-2xl bg-slate-100/90 dark:bg-gray-950/75 border border-slate-200 dark:border-gray-900/60 p-3 shadow-inner z-10 overflow-hidden select-none transition-all duration-700 blur-[2px] opacity-40 hover:blur-[0.5px] hover:opacity-75 pointer-events-none">
               {/* Timeline Ruler */}
-              <div className="flex justify-between items-center h-4 border-b border-gray-800/60 pb-1 mb-2">
+              <div className="flex justify-between items-center h-4 border-b border-slate-200 dark:border-gray-800/60 pb-1 mb-2">
                 {[...Array(6)].map((_, i) => (
                   <div key={i} className="flex flex-col items-center h-full">
-                    <span className="text-[6px] font-mono text-gray-600 font-bold">00:0{i}f</span>
-                    <div className="w-[1px] h-1 bg-gray-800" />
+                    <span className="text-[6px] font-mono text-slate-400 dark:text-gray-600 font-bold">00:0{i}f</span>
+                    <div className="w-[1px] h-1 bg-slate-200 dark:bg-gray-800" />
                   </div>
                 ))}
               </div>
@@ -489,14 +493,14 @@ export default function Hero() {
             <div className="absolute -inset-4 rounded-[46px] border border-indigo-500/5 pointer-events-none z-15" />
 
             {/* Core Avatar Container & Interactive Image Frame */}
-            <div className="h-full w-full rounded-[32px] bg-gray-950/40 backdrop-blur-[12px] p-2.5 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.85)] relative overflow-hidden z-20 group">
+            <div className="h-full w-full rounded-[32px] bg-slate-50/50 dark:bg-gray-950/40 backdrop-blur-[12px] p-2.5 border border-slate-200 dark:border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.85)] relative overflow-hidden z-20 group">
               
               {/* Rotating sci-fi energy rings inside the frame */}
               <div className="absolute inset-4 rounded-full border border-dashed border-blue-500/20 animate-[spin_25s_linear_infinite] pointer-events-none z-10" />
               <div className="absolute inset-8 rounded-full border border-double border-indigo-500/10 animate-[spin_40s_linear_infinite_reverse] pointer-events-none z-10" />
 
               {/* Premium Background layers: subtle shifting linear gradient */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-950/25 via-gray-950/80 to-indigo-950/25 z-0 opacity-80 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-50/25 via-white/80 to-indigo-50/25 dark:from-blue-950/25 dark:via-gray-950/80 dark:to-indigo-950/25 z-0 opacity-80 pointer-events-none" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(59,130,246,0.12),transparent_70%)] z-0 pointer-events-none" />
 
               {/* Cinematic spotlight behind the body */}
@@ -577,7 +581,7 @@ export default function Hero() {
 
             {/* Floating Card A: Video Editor Specialist Badge */}
             <motion.div
-              className="absolute -top-3 -left-3 sm:-top-5 sm:-left-6 scale-90 sm:scale-100 bg-gray-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 shadow-[0_8px_30px_rgba(59,130,246,0.2)] select-none z-30 origin-top-left"
+              className="absolute -top-3 -left-3 sm:-top-5 sm:-left-6 scale-90 sm:scale-100 bg-white/95 dark:bg-gray-950/80 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-2xl p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 shadow-[0_8px_30px_rgba(59,130,246,0.1)] dark:shadow-[0_8px_30px_rgba(59,130,246,0.2)] select-none z-30 origin-top-left"
               animate={{ y: [0, -6, 0] }}
               transition={{ repeat: Infinity, duration: 4.2, ease: 'easeInOut' }}
               whileHover={{ scale: 1.05, boxShadow: '0 12px 35px rgba(59, 130, 246, 0.45)' }}
@@ -587,13 +591,13 @@ export default function Hero() {
               </div>
               <div className="text-left pr-1">
                 <p className="text-[8px] sm:text-[9px] font-bold text-blue-400 uppercase tracking-widest">Professional</p>
-                <p className="text-[10px] sm:text-xs font-black text-white">Video Editor</p>
+                <p className="text-[10px] sm:text-xs font-black text-slate-850 dark:text-white">Video Editor</p>
               </div>
             </motion.div>
 
             {/* Floating Card B: Premium Quality Rating Badge */}
             <motion.div
-              className="absolute -bottom-3 -right-2 sm:-right-4 scale-90 sm:scale-100 bg-gray-950/85 backdrop-blur-md border border-white/10 rounded-2xl p-2.5 sm:p-3 flex flex-col gap-1.5 shadow-[0_10px_35px_rgba(59,130,246,0.22)] select-none z-30 origin-bottom-right"
+              className="absolute -bottom-3 -right-2 sm:-right-4 scale-90 sm:scale-100 bg-white/95 dark:bg-gray-950/85 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-2xl p-2.5 sm:p-3 flex flex-col gap-1.5 shadow-[0_10px_35px_rgba(59,130,246,0.1)] dark:shadow-[0_10px_35px_rgba(59,130,246,0.22)] select-none z-30 origin-bottom-right"
               animate={{ y: [0, 5, 0] }}
               transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut' }}
               whileHover={{ scale: 1.05, boxShadow: '0 15px 40px rgba(59, 130, 246, 0.45)' }}
@@ -604,10 +608,10 @@ export default function Hero() {
                 </div>
                 <div className="text-left pr-1">
                   <p className="text-[8px] sm:text-[9px] font-bold text-blue-400 uppercase tracking-widest">Creative Portfolio</p>
-                  <p className="text-[10px] sm:text-xs font-black text-white">Premium Quality</p>
+                  <p className="text-[10px] sm:text-xs font-black text-slate-850 dark:text-white">Premium Quality</p>
                 </div>
               </div>
-              <div className="flex gap-1 justify-center bg-white/5 py-1 px-2 rounded-lg border border-white/5 shadow-inner">
+              <div className="flex gap-1 justify-center bg-slate-100 dark:bg-white/5 py-1 px-2 rounded-lg border border-slate-200 dark:border-white/5 shadow-inner">
                 {[...Array(5)].map((_, idx) => (
                   <Star key={idx} className="h-3 w-3 text-amber-400 fill-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.95)]" />
                 ))}
@@ -616,7 +620,7 @@ export default function Hero() {
 
             {/* Floating Card C: Creative Designer Badge */}
             <motion.div
-              className="absolute bottom-1/3 -left-3 sm:-left-8 scale-90 sm:scale-100 bg-gray-950/80 backdrop-blur-md border border-white/10 rounded-2xl p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 shadow-[0_8px_30px_rgba(99,102,241,0.15)] select-none z-30 origin-left"
+              className="absolute bottom-1/3 -left-3 sm:-left-8 scale-90 sm:scale-100 bg-white/95 dark:bg-gray-950/80 backdrop-blur-md border border-slate-200 dark:border-white/10 rounded-2xl p-2 sm:p-2.5 flex items-center gap-2 sm:gap-2.5 shadow-[0_8px_30px_rgba(99,102,241,0.1)] dark:shadow-[0_8px_30px_rgba(99,102,241,0.15)] select-none z-30 origin-left"
               animate={{ x: [0, -4, 0] }}
               transition={{ repeat: Infinity, duration: 5.2, ease: 'easeInOut' }}
               whileHover={{ scale: 1.05, boxShadow: '0 12px 35px rgba(99, 102, 241, 0.4)' }}
@@ -626,7 +630,7 @@ export default function Hero() {
               </div>
               <div className="text-left pr-1">
                 <p className="text-[8px] sm:text-[9px] font-bold text-indigo-400 uppercase tracking-widest">Creative</p>
-                <p className="text-[10px] sm:text-xs font-black text-white">Designer</p>
+                <p className="text-[10px] sm:text-xs font-black text-slate-850 dark:text-white">Designer</p>
               </div>
             </motion.div>
           </motion.div>
@@ -637,9 +641,9 @@ export default function Hero() {
       <div className="w-full mt-12 relative z-10">
         <div className="text-center mb-6">
           <p className="text-[10px] font-mono font-bold text-blue-500 uppercase tracking-widest mb-1">// LIVE WORKSPACE</p>
-          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">Interactive Creative Timeline</h3>
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">Interactive Creative Timeline</h3>
         </div>
-        <PremiereTimeline />
+        <PremiereTimeline darkMode={darkMode} />
       </div>
 
     </section>

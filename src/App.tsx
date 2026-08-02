@@ -54,7 +54,7 @@ export default function App() {
           }`}
         >
           {/* 2. Interactive Cursor Glow and Follower */}
-          <CursorGlow />
+          <CursorGlow darkMode={darkMode} />
 
           {/* 3. Navigation Header Bar */}
           <Navbar 
@@ -66,17 +66,17 @@ export default function App() {
           {/* 4. Single-page creative layouts */}
           <main className="relative">
             {/* Soft geometric grid pattern */}
-            <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[radial-gradient(rgba(255,255,255,0.015)_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
             
-            <Hero />
-            <About />
-            <Skills />
-            <Portfolio />
-            <Contact />
+            <Hero darkMode={darkMode} />
+            <About darkMode={darkMode} />
+            <Skills darkMode={darkMode} />
+            <Portfolio darkMode={darkMode} />
+            <Contact darkMode={darkMode} />
           </main>
 
           {/* 5. Minimalist detailed footer */}
-          <Footer onTrigger404={() => setShow404(true)} />
+          <Footer darkMode={darkMode} onTrigger404={() => setShow404(true)} />
 
           {/* Floating Back to Top Button (requested) */}
           <AnimatePresence>
@@ -88,7 +88,7 @@ export default function App() {
                 whileHover={{ scale: 1.1, y: -2 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="fixed bottom-24 right-6 z-40 h-14 w-14 rounded-full bg-gray-950/80 backdrop-blur-md border border-white/10 hover:border-blue-500/30 text-white flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all cursor-pointer group"
+                className="fixed bottom-24 right-6 z-40 h-14 w-14 rounded-full bg-slate-100 dark:bg-gray-950/80 backdrop-blur-md border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white flex items-center justify-center shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all cursor-pointer group"
                 title="Scroll to Top"
                 id="floating-back-to-top"
               >

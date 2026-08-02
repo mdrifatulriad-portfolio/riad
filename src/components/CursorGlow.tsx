@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 
-export default function CursorGlow() {
+interface CursorGlowProps {
+  darkMode?: boolean;
+}
+
+export default function CursorGlow({ darkMode = true }: CursorGlowProps) {
   const [mounted, setMounted] = useState(false);
   const [cursorType, setCursorType] = useState<'default' | 'play' | 'click' | 'link'>('default');
 
@@ -65,7 +69,9 @@ export default function CursorGlow() {
 
       {/* Tiny precise interactive dot */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-50 hidden -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/35 bg-blue-500/5 mix-blend-screen md:flex items-center justify-center text-center select-none overflow-hidden"
+        className={`pointer-events-none fixed top-0 left-0 z-50 hidden -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/35 bg-blue-500/5 md:flex items-center justify-center text-center select-none overflow-hidden ${
+          darkMode ? 'mix-blend-screen' : ''
+        }`}
         animate={{
           width: cursorType === 'play' ? 64 : cursorType === 'click' ? 52 : cursorType === 'link' ? 40 : 18,
           height: cursorType === 'play' ? 64 : cursorType === 'click' ? 52 : cursorType === 'link' ? 40 : 18,
@@ -82,7 +88,9 @@ export default function CursorGlow() {
           <motion.span 
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-[8px] font-mono font-black tracking-widest text-white uppercase select-none pointer-events-none"
+            className={`text-[8px] font-mono font-black tracking-widest uppercase select-none pointer-events-none ${
+              darkMode ? 'text-white' : 'text-blue-600'
+            }`}
           >
             PLAY
           </motion.span>
@@ -91,7 +99,9 @@ export default function CursorGlow() {
           <motion.span 
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-[8px] font-mono font-black tracking-widest text-indigo-200 uppercase select-none pointer-events-none"
+            className={`text-[8px] font-mono font-black tracking-widest uppercase select-none pointer-events-none ${
+              darkMode ? 'text-indigo-200' : 'text-indigo-600'
+            }`}
           >
             CLICK
           </motion.span>
