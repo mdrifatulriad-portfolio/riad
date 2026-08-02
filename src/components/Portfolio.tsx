@@ -328,7 +328,7 @@ export default function Portfolio({ darkMode = true }: PortfolioProps) {
               }
             }
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 justify-center"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-6 md:gap-8 justify-center"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => {
@@ -374,6 +374,7 @@ export default function Portfolio({ darkMode = true }: PortfolioProps) {
                       src={project.image}
                       alt={project.title}
                       referrerPolicy="no-referrer"
+                      loading="lazy"
                       className="h-full w-full object-cover transition-all duration-700 ease-out group-hover:scale-105 brightness-112 contrast-108 group-hover:brightness-122"
                     />
 

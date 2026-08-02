@@ -13,7 +13,10 @@ import Custom404 from './components/Custom404';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem('portfolio-theme');
+    return saved !== null ? saved === 'dark' : true;
+  });
   const [show404, setShow404] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -29,8 +32,9 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Sync Tailwind dark class with state
+  // Sync Tailwind dark class with state and persist theme choice
   useEffect(() => {
+    localStorage.setItem('portfolio-theme', darkMode ? 'dark' : 'light');
     if (darkMode) {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
